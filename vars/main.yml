@@ -1,0 +1,15 @@
+---
+# vars file for openhome_player
+openhome_packages:
+  - git
+  - mono-complete
+  - gcc-8
+  - g++-8
+  - libnotify-dev
+  - notify-osd
+  - libasound2-dev
+  - libappindicator3-dev
+  - python2.7
+  - pip
+#  - gtk+\-3-dev
+

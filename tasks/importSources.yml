@@ -1,0 +1,49 @@
+---
+# tasks file for openhome_player
+- name: ansible create directory example
+  ansible.builtin.file:
+    path: "{{ openhome_folder }}"
+    state: directory
+
+- name: Install openssl sources
+  git:
+    repo: 'https://github.com/openhome/openssl'
+    dest: "{{ openhome_folder }}/openssl"
+    update: no
+
+- name: Install ohPlayer sources
+  git:
+    repo: 'https://github.com/jchassin/ohPlayer'
+    dest: "{{ openhome_folder }}/ohPlayer"
+
+- name: Install ohdevtools sources
+  ansible.builtin.unarchive:
+    src: template/ohdevtools.tar.gz
+    dest: "{{ openhome_folder }}/."
+
+- name: Install ohMediaPlayer sources
+  git:
+    repo: 'https://github.com/openhome/ohPipeline'
+    dest: "{{ openhome_folder }}/ohPipeline"
+    update: no
+
+- name: Install ohNet sources
+  git:
+    repo: 'https://github.com/openhome/ohNet'
+    dest: "{{ openhome_folder }}/ohNet"
+
+- name: Install ohNetGenerated sources
+  git:
+    repo: 'https://github.com/openhome/ohNetGenerated'
+    dest: "{{ openhome_folder }}/ohNetGenerated"
+
+
+- name: Copy ohpFetch 
+  template:
+    src: template/ohpFetch.j2
+    dest: "{{ openhome_folder }}/ohPlayer/ohpFetch"
+    mode: 0760
+
+- name: fetch ohPlayer
+  ansible.builtin.shell: /home/jean/openhome_player/ohPlayer/ohpFetch
+ 

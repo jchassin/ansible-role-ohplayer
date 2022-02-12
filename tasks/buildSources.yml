@@ -1,0 +1,41 @@
+# tasks file for openhome_player
+
+- name: Build ohNet
+  ansible.builtin.shell: cd "{{ openhome_folder }}/ohNet" ; make GenAll uset4=yes ; make
+
+- name: Build openssl
+  ansible.builtin.shell: cd "{{ openhome_folder }}/openssl" ; python ./create_lib.py --platform Linux-armhf --configure --clean --build  
+
+- name: Build ohNetGenerated
+  ansible.builtin.shell:
+     cmd: |
+       cd "{{ openhome_folder }}/ohNetGenerated" ; mkdir -p dependencies/Linux-armhf
+       cp ../ohNet/Build/Bundles/ohNet-Linux-armhf-Release.tar.gz ./dependencies/Linux-armhf/.
+       cd dependencies/Linux-armhf ; tar -xzf ohNet-Linux-armhf-Release.tar.gz ; cd ../..
+       make GenAll uset4=yes
+       make
+
+- name: Build ohMediaPlayer
+  ansible.builtin.shell:
+     cmd: |
+       mkdir -p "{{ openhome_folder }}/ohPipeline/dependencies/Linux-armhf"
+       cd "{{ openhome_folder }}/ohPipeline/."
+       cp ../ohPlayer/go .
+       #cp -Rf ../ohPlayer/dependencies/Linux-rpi/openssl dependencies/Linux-armhf/.
+       ./go fetch --all
+       #./waf configure --dest-platform=Linux-armhf --ohnet=../ohNet --ssl=dependencies/Linux-armhf/openssl --cross=
+       ./waf configure --dest-platform=Linux-armhf --ohnet=../ohNet --ssl=../openssl/build/Linux-armhf --cross=
+       ./waf build
+       ./waf bundle
+
+- name: Build ohPlayer
+  ansible.builtin.shell:
+     cmd: |
+       cd "{{ openhome_folder }}/ohPlayer/."
+       cp ../ohNet/Build/Bundles/ohNet-Linux-armhf-Release.tar.gz ./dependencies/Linux-rpi/.
+       cp -Rf ../ohPipeline/build/ohMediaPlayer.tar.gz dependencies/Linux-rpi/.
+       cd dependencies/Linux-rpi
+       tar -xzf ohNet-Linux-armhf-Release.tar.gz ; mv ohNet-Linux-armhf-Release ohNet-Linux-rpi-Release
+       tar -xzf ohMediaPlayer.tar.gz
+       cd ../../linux ; DISABLE_GTK=1 make raspbian
+

@@ -1,0 +1,61 @@
+---
+# tasks file for openhome_player
+- name: Install 
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ openhome_packages }}"
+
+- name: Alternatives link gcc10
+  become: yes
+  community.general.alternatives:
+    name: gcc
+    link: /usr/bin/gcc
+    path: /usr/bin/gcc-10
+    priority: 10
+
+- name: Alternatives link gcc8 
+  become: yes
+  community.general.alternatives:
+    name: gcc 
+    link: /usr/bin/gcc
+    path: /usr/bin/gcc-8
+    priority: 20
+
+- name: Alternatives link g++-10
+  become: yes
+  community.general.alternatives:
+    name: g++
+    link: /usr/bin/g++
+    path: /usr/bin/g++-10
+    priority: 10
+
+- name: Alternatives link g++8
+  become: yes
+  community.general.alternatives:
+    name: g++
+    link: /usr/bin/g++
+    path: /usr/bin/g++-8
+    priority: 20
+
+- name: Alternatives link python 3
+  become: yes
+  community.general.alternatives:
+    name: python
+    link: /usr/bin/python
+    path: /usr/bin/python3
+    priority: 10
+
+- name: Alternatives link python 2.7
+  become: yes
+  community.general.alternatives:
+    name: python
+    link: /usr/bin/python
+    path: /usr/bin/python2.7
+    priority: 20
+
+- name: Install boto3 python package
+  pip:
+    name: boto3
+
