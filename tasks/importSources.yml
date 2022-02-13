@@ -43,4 +43,3 @@
   git:
     repo: "{{ openhome_ohnetgenerated_repo }}"
     dest: "{{ openhome_folder }}/ohNetGenerated"
-

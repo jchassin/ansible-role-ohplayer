@@ -5,4 +5,3 @@
     - openhome_folder: /home/USERNAME/openhome
   roles:
     - role: jchassin.ohplayer
-

@@ -3,7 +3,6 @@ galaxy_info:
   namespace: jchassin
   role_name: ohplayer
   description: Installs compilation chain, imports sources and builds openhome-player
-  company: your company (optional)
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value

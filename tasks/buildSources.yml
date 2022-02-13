@@ -46,6 +46,4 @@
        # install ohMediaPlayer
        cp -Rf "{{ openhome_folder }}/ohPipeline/build/ohMediaPlayer.tar.gz" "."
        tar -xzf ohMediaPlayer.tar.gz
-
        cd ../../linux ; DISABLE_GTK=1 make raspbian
-
