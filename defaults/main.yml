@@ -2,6 +2,13 @@
 # defaults file for openhome_player
 openhome_folder: /home/pi/openhome_player
 
+openhome_openssl_repo: https://github.com/openhome/openssl
+openhome_ohtools_repo: https://github.com/openhome/ohdevtools
+openhome_ohmediaplayer_repo: https://github.com/openhome/ohPipeline
+openhome_ohnet_repo: https://github.com/openhome/ohNet
+openhome_ohnetgenerated_repo: https://github.com/openhome/ohNetGenerated
+openhome_ohplayer_repo: https://github.com/jchassin/ohPlayer
+openhome_ohwafhelpers_repo: https://github.com/openhome/ohWafHelpers
 
 
 

@@ -1,6 +1,6 @@
 # tasks file for openhome_player
 
-- include: openhome_player/tasks/setupToolChain.yml
-- include: openhome_player/tasks/importSources.yml
-- include: openhome_player/tasks/buildSources.yml
+- include: setupToolChain.yml
+- include: importSources.yml
+- include: buildSources.yml
 

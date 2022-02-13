@@ -11,5 +11,5 @@ openhome_packages:
   - libappindicator3-dev
   - python2.7
   - pip
-#  - gtk+\-3-dev
+#  - gtk+-3-dev
 

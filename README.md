@@ -1,31 +1,55 @@
 # [ohplayer](#ohplayer)
 =========
 
-A brief description of the role goes here.
+This role setup the compilation chain, get the sources, update dependencies and build every thing
+This role is defined for Linux Raspbian Raspberry target (testing on bullseye os and on Audiophonics Raspdac Mini LCD HW but should work with whatever other raspberrypi)
+This role is written to be used instead of using provided dependency fetch from Linn that does not work anymore since 2021
 
 Requirements
 ------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+OS : Raspbian
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Have a look to defaults/main.yaml to get the customizable variables. 
+
+By defaults, it get the openhome repository sources except of ohPlayer itself that it takes from my own repo :
+openhome_openssl_repo: https://github.com/openhome/openssl
+openhome_ohtools_repo: https://github.com/openhome/ohdevtools
+openhome_ohmediaplayer_repo: https://github.com/openhome/ohPipeline
+openhome_ohnet_repo: https://github.com/openhome/ohNet
+openhome_ohnetgenerated_repo: https://github.com/openhome/ohNetGenerated
+openhome_ohplayer_repo: https://github.com/jchassin/ohPlayer
+openhome_ohwafhelpers_repo: https://github.com/openhome/ohWafHelpers
+
+Default destination folder : 
+openhome_folder: /home/pi/openhome_player
+
+See example to see how to override variables
 
 Dependencies
 ------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+N/A
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Install the role : 
+ansible-galaxy install  jchassin.ohplayer
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+
+You can put this in a playbook myPb.yaml : 
+---
+- name: installing audio streamers task
+  hosts: my_host
+  vars:
+    - openhome_folder: /home/USERNAME/openhome
+  roles:
+    - role: jchassin.ohplayer
+
+and then execute : 
+ansible -i YourInventoryFolder myPb.yaml
 
 License
 -------
@@ -35,4 +59,8 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Limitation:
+
+- issue to install automatically on lib, you need to install manually gtk+-3-dev
+	sudo apt-get install gtk+-3-dev
+

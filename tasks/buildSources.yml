@@ -19,11 +19,9 @@
   ansible.builtin.shell:
      cmd: |
        mkdir -p "{{ openhome_folder }}/ohPipeline/dependencies/Linux-armhf"
+       mkdir -p "{{ openhome_folder }}/ohPipeline/dependencies/AnyPlatform"
+       ln -s "{{ openhome_folder }}/ohWafHelpers" "{{ openhome_folder }}/ohPipeline/dependencies/AnyPlatform"
        cd "{{ openhome_folder }}/ohPipeline/."
-       cp ../ohPlayer/go .
-       #cp -Rf ../ohPlayer/dependencies/Linux-rpi/openssl dependencies/Linux-armhf/.
-       ./go fetch --all
-       #./waf configure --dest-platform=Linux-armhf --ohnet=../ohNet --ssl=dependencies/Linux-armhf/openssl --cross=
        ./waf configure --dest-platform=Linux-armhf --ohnet=../ohNet --ssl=../openssl/build/Linux-armhf --cross=
        ./waf build
        ./waf bundle
@@ -31,11 +29,23 @@
 - name: Build ohPlayer
   ansible.builtin.shell:
      cmd: |
+       mkdir -p "{{ openhome_folder }}/ohPlayer/dependencies/AnyPlatform"
+       ln -s "{{ openhome_folder }}/ohWafHelpers" "{{ openhome_folder }}/ohPlayer/dependencies/AnyPlatform"
        cd "{{ openhome_folder }}/ohPlayer/."
-       cp ../ohNet/Build/Bundles/ohNet-Linux-armhf-Release.tar.gz ./dependencies/Linux-rpi/.
-       cp -Rf ../ohPipeline/build/ohMediaPlayer.tar.gz dependencies/Linux-rpi/.
+       mkdir -p "{{ openhome_folder }}/ohPlayer/dependencies/Linux-rpi"
        cd dependencies/Linux-rpi
+       # put openssl
+       cp "{{ openhome_folder }}/openssl/build/openssl-development-Linux-armhf-Release.tar.bz2" .
+       tar -xf openssl-development-Linux-armhf-Release.tar.bz2
+
+       cp "{{ openhome_folder }}/ohNet/Build/Bundles/ohNet-Linux-armhf-Release.tar.gz" "."
        tar -xzf ohNet-Linux-armhf-Release.tar.gz ; mv ohNet-Linux-armhf-Release ohNet-Linux-rpi-Release
+
+       cp "{{ openhome_folder }}/ohNetGenerated/Build/Bundles/ohNetGenerated-Linux-armhf-Release.tar.gz" "."
+       tar -xzf  ohNetGenerated-Linux-armhf-Release.tar.gz; mv ohNetGenerated-Linux-armhf-Release ohNetGenerated-Linux-rpi-Release
+
+       cp -Rf "{{ openhome_folder }}/ohPipeline/build/ohMediaPlayer.tar.gz" "."
        tar -xzf ohMediaPlayer.tar.gz
+
        cd ../../linux ; DISABLE_GTK=1 make raspbian
 
