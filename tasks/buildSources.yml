@@ -37,13 +37,13 @@
        # put openssl
        cp "{{ openhome_folder }}/openssl/build/openssl-development-Linux-armhf-Release.tar.bz2" .
        tar -xf openssl-development-Linux-armhf-Release.tar.bz2
-
+       i# Install ohNet
        cp "{{ openhome_folder }}/ohNet/Build/Bundles/ohNet-Linux-armhf-Release.tar.gz" "."
        tar -xzf ohNet-Linux-armhf-Release.tar.gz ; mv ohNet-Linux-armhf-Release ohNet-Linux-rpi-Release
-
+       # Install ohNetGenerated
        cp "{{ openhome_folder }}/ohNetGenerated/Build/Bundles/ohNetGenerated-Linux-armhf-Release.tar.gz" "."
        tar -xzf  ohNetGenerated-Linux-armhf-Release.tar.gz; mv ohNetGenerated-Linux-armhf-Release ohNetGenerated-Linux-rpi-Release
-
+       # install ohMediaPlayer
        cp -Rf "{{ openhome_folder }}/ohPipeline/build/ohMediaPlayer.tar.gz" "."
        tar -xzf ohMediaPlayer.tar.gz
 

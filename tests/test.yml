@@ -1,5 +1,8 @@
 ---
-- hosts: localhost
-  remote_user: root
+- name: installing audio streamers task
+  hosts: localhost
+  vars:
+    - openhome_folder: /home/USERNAME/openhome
   roles:
-    - openhome_player
+    - role: jchassin.ohplayer
+

@@ -1,18 +1,1 @@
-ohNet :
-make GenAll uset4=yes
-
-ohNetGenerated
-> corriger go
-./go fetch --all
-mkdir dependencies/Linux-armhf
-cp ../ohNet/Build/Bundles/ohNet-Linux-armhf-Release.tar.gz ./dependencies/Linux-armhf/.
-cd dependencies/Linux-armhf ; tar -xzf ohNet-Linux-armhf-Release.tar.gz ; cd ../..
-make GenAll uset4=yes
-make
-
-ohPipeline :
-mkdir ohPipeline/dependencies/Linux-armhf
-cp openssl
-./waf configure --ohnet=../ohNet --ssl=dependencies/Linux-armhf/openssl
-./waf configure --dest-platform=Linux-armhf --ohnet=../ohNet --ssl=dependencies/Linux-armhf/openssl --cross=
-
+ansible -i YourInventoryFolder test.ym
