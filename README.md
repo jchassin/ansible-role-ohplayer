@@ -16,12 +16,19 @@ Have a look to defaults/main.yaml to get the customizable variables.
 
 By defaults, it get the openhome repository sources except of ohPlayer itself that it takes from my own repo :
 openhome_openssl_repo: https://github.com/openhome/openssl
+
 openhome_ohtools_repo: https://github.com/openhome/ohdevtools
+
 openhome_ohmediaplayer_repo: https://github.com/openhome/ohPipeline
+
 openhome_ohnet_repo: https://github.com/openhome/ohNet
+
 openhome_ohnetgenerated_repo: https://github.com/openhome/ohNetGenerated
+
 openhome_ohplayer_repo: https://github.com/jchassin/ohPlayer
+
 openhome_ohwafhelpers_repo: https://github.com/openhome/ohWafHelpers
+
 
 Default destination folder : 
 openhome_folder: /home/pi/openhome_player
