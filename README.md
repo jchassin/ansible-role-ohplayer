@@ -3,7 +3,7 @@
 
 This role setup the compilation chain, get the sources, update dependencies and build every thing
 This role is defined for Linux Raspbian Raspberry target (testing on bullseye os and on Audiophonics Raspdac Mini LCD HW but should work with whatever other raspberrypi)
-This role is written to be used instead of using provided dependency fetch from Linn that does not work anymore since 2021
+This role is written to be used instead of using provided dependency fetch from Linn that does not work anymore since 2021 for non Linn people
 
 Requirements
 ------------
@@ -40,6 +40,7 @@ ansible-galaxy install  jchassin.ohplayer
 
 
 You can put this in a playbook myPb.yaml : 
+
 ---
 - name: installing audio streamers task
   hosts: my_host
